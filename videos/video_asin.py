@@ -1,5 +1,5 @@
 import time
-from pytube import YouTube
+# from pytube import YouTube
 import concurrent.futures
 import threading
 
@@ -10,7 +10,7 @@ def service(services):
         executor.map(download_video, services)
 
 def download_video(url):
-    video = YouTube(url)
+    # video = YouTube(url)
     download = video.streams.get_highest_resolution()
     download.download()
 
