@@ -1,3 +1,4 @@
+from random import randint
 from time import sleep
 from threading import Condition, Thread
 
@@ -22,7 +23,7 @@ class Client(Thread):
     
     def comiendo(self):
         print(f"--Yo {self.name} estoy comiendo--")
-        sleep(10)
+        sleep(randint(1, 10))
         print(f"--Yo {self.name} he terminado de comer y me voy--")
         self.tables.remove(self.name)
             

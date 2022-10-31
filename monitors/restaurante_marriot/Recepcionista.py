@@ -44,7 +44,6 @@ class Receptionista(Thread):
             self.reservations.append(client)
             print(f"-Recepcionista: 1 lugar disponible y se le dará una reservación al cliente {client}")
             self.atender(client,1)
-            print(str(client))
             self.enqueue.remove(client)
             return True
         else:
