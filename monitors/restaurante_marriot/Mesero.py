@@ -1,4 +1,5 @@
 from threading import Thread
+from termcolor import colored
 from time import sleep
 
 class Mesero(Thread):
@@ -11,7 +12,7 @@ class Mesero(Thread):
         
     def attend(self, client):
         self.conditionM.acquire()
-        print(f"-Mesero: tomando la orden del cliente {client}")
+        print(colored( f"-Mesero: tomando la orden del cliente {client}", "blue"))
         self.order = [client, False]
         self.sendOrderToCook(client)
         sleep(10)
@@ -21,13 +22,13 @@ class Mesero(Thread):
             
     def sendOrderToCook(self, client):
           self.conditionM.acquire()
-          print(f"-Mesero: llevando la orden de {client} al concinero")
+          print(colored(f"-Mesero: llevando la orden de {client} al concinero", "blue"))
           sleep(5)
           self.cocinero.cocinar(client)
           sleep(2)
           self.conditionM.notify()
           self.conditionM.release()
-          print("-Mesero: Descansando")
+          print(colored("-Mesero: Descansando","red"))
           
     def llevarComida(self, client):
         self.conditionM.acquire()
@@ -35,5 +36,5 @@ class Mesero(Thread):
         self.conditionM.notify()
         self.conditionM.release()
         self.order = ["", False]
-        print("-Mesero: Descansando")
+        print(colored("-Mesero: Descansando","red"))
         return True
