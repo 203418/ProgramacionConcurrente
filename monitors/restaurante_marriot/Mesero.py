@@ -27,6 +27,7 @@ class Mesero(Thread):
           sleep(2)
           self.conditionM.notify()
           self.conditionM.release()
+          print("-Mesero: Descansando")
           
     def llevarComida(self, client):
         self.conditionM.acquire()
@@ -34,4 +35,5 @@ class Mesero(Thread):
         self.conditionM.notify()
         self.conditionM.release()
         self.order = ["", False]
+        print("-Mesero: Descansando")
         return True

@@ -14,14 +14,15 @@ class Client(Thread):
         self.order = order
         self.condition = Condition()
         
-    def requestServiceToRecepcionist(self):
-        self.sentado = self.recepcionista.atender(self.name, 0)
         
-    def recibirComida(self):
+    def requestServiceToRecepcionist(self):
+        self.sentado = self.recepcionista.attend(self.name, 0)
+        
+    def receiveFood(self):
         print(f"-Mesero: llevando la comida al cliente {self.name}")
         self.comer = self.mesero.llevarComida
     
-    def comiendo(self):
+    def eating(self):
         print(f"--Yo {self.name} estoy comiendo--")
         sleep(randint(1, 10))
         print(f"--Yo {self.name} he terminado de comer y me voy--")
@@ -37,10 +38,10 @@ class Client(Thread):
             self.mesero.attend(self.name)
             while(self.comer == False):
                 if self.order[1] == True:
-                    self.recibirComida()
+                    self.receiveFood()
                 self.condition.acquire()
                 if (self.comer == True):
                     self.condition.notify()
                     self.condition.release()
             if self.comer:
-                self.comiendo()
+                self.eating()

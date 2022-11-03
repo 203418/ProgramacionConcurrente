@@ -10,7 +10,7 @@ class Receptionista(Thread):
         self.CAPACITY = capacity
         self.enqueue = enqueue
         
-    def atender(self, client, op):
+    def attend(self, client, op):
         hasReservation = False
         self.conditionR.acquire()
         if (op == 0): print(f"-Recepcionista: Atendiendo al cliente {client}")
@@ -28,7 +28,7 @@ class Receptionista(Thread):
             if (len(self.tables) < self.CAPACITY and (len(self.reservations) + len(self.tables) < self.CAPACITY)):
                 self.reservations.append(client)
                 print(f"-Recepcionista: se le dará una reservación al cliente {client}")
-                self.atender(client,1)
+                self.attend(client,1)
                 hasReservation = True
             else:
                 print(f"-Recepcionista: {client} no tiene reservación y no hay mesas disponibles, irá a la cola")
@@ -43,7 +43,7 @@ class Receptionista(Thread):
         if (len(self.tables) < self.CAPACITY and (len(self.reservations) + len(self.tables) < self.CAPACITY)):
             self.reservations.append(client)
             print(f"-Recepcionista: 1 lugar disponible y se le dará una reservación al cliente {client}")
-            self.atender(client,1)
+            self.attend(client,1)
             self.enqueue.remove(client)
             return True
         else:

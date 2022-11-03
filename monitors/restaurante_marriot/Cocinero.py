@@ -14,3 +14,4 @@ class Cocinero(Thread):
         self.order[1] = True
         self.conditionC.notify()
         self.conditionC.release()
+        print("-Cocinero: Estoy descasando")
